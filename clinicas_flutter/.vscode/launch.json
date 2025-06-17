@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "atendimento",
+            "cwd": "atendimento",
+            "request": "launch",
+            "type": "dart",
+            "program": "../atendimento/lib/main.dart",
+            
+           
+        },
+        {
+            "name": "atendimento (profile mode)",
+            "cwd": "atendimento",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "atendimento (release mode)",
+            "cwd": "atendimento",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "clinicas_core",
+            "cwd": "clinicas_core",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "clinicas_core (profile mode)",
+            "cwd": "clinicas_core",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "clinicas_core (release mode)",
+            "cwd": "clinicas_core",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

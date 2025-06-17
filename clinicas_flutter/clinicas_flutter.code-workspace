@@ -1,0 +1,43 @@
+{
+	"folders": [
+		{
+			"name": "Atendimento",
+			"path": "./atendimento"
+		},
+		{
+			"name": "Core",
+			"path": "./core"
+		},
+		{
+			"name": "Clinicas API",
+			"path": "./clinicas_api"
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Atendimento",
+				"request": "launch",
+				"program": "./atendimento/lib/main.dart",
+				"type": "dart"
+			},
+			{
+				"name": "Atendimento (profile mode)",
+				"request": "launch",
+				"type": "dart",
+				"program": "./atendimento/lib/main.dart",
+				"flutterMode": "profile"
+			},
+			{
+				"name": "Atendimento (release mode)",
+				"request": "launch",
+				"type": "dart",
+				"program": "./atendimento/lib/main.dart",
+				"flutterMode": "release"
+			}
+		],
+		"compounds": []
+	},
+	"settings": {}
+}
