@@ -6,6 +6,7 @@ import 'package:atendimento/src/modules/self_service/find_patient/find_patient_r
 import 'package:atendimento/src/modules/self_service/self_service_controller.dart';
 import 'package:atendimento/src/modules/self_service/self_service_page.dart';
 import 'package:atendimento/src/modules/self_service/who_i_am/who_i_am_page.dart';
+import 'package:atendimento/src/repositories/information_from/information_form_repository_impl.dart';
 import 'package:atendimento/src/repositories/patients/patient_repository.dart';
 import 'package:atendimento/src/repositories/patients/patient_repository_impl.dart';
 import 'package:atendimento/src/utils/routes.dart';
@@ -17,7 +18,10 @@ import 'patient/patient_router.dart';
 class SelfServiceModule extends FlutterGetItModule {
   @override
   List<Bind<Object>> get bindings => [
-        Bind.lazySingleton((i) => SelfServiceController()),
+        Bind.lazySingleton(
+            (i) => InformationFormRepositoryImpl(restClient: i())),
+        Bind.lazySingleton(
+            (i) => SelfServiceController(informationFormRepository: i())),
         Bind.lazySingleton<PatientRepository>(
             (i) => PatientRepositoryImpl(restClient: i())),
       ];
