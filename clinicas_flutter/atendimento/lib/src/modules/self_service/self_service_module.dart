@@ -1,6 +1,6 @@
 import 'package:atendimento/src/modules/self_service/documents/documents_page.dart';
-import 'package:atendimento/src/modules/self_service/documents/scan/scan_page.dart';
-import 'package:atendimento/src/modules/self_service/documents/scan_confirm/scan_confirm_page.dart';
+import 'package:atendimento/src/modules/self_service/documents/scan/documents_scan_page.dart';
+import 'package:atendimento/src/modules/self_service/documents/scan_confirm/documents_scan_confirm_router.dart';
 import 'package:atendimento/src/modules/self_service/done/done_page.dart';
 import 'package:atendimento/src/modules/self_service/find_patient/find_patient_router.dart';
 import 'package:atendimento/src/modules/self_service/self_service_controller.dart';
@@ -32,8 +32,8 @@ class SelfServiceModule extends FlutterGetItModule {
         findPatient: (ctx) => FindPatientRouter(),
         patient: (ctx) => PatientRouter(),
         documents: (ctx) => DocumentsPage(),
-        documentsScan: (ctx) => ScanPage(),
-        documentsScanConfirm: (ctx) => ScanConfirmPage(),
+        documentsScan: (ctx) => DocumentsScanPage(),
+        documentsScanConfirm: (ctx) => DocumentsScanConfirmRouter(),
         done: (ctx) => DonePage(),
       };
 }

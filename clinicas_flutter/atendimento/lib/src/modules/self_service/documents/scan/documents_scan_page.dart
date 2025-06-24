@@ -1,16 +1,19 @@
+import 'package:asyncstate/asyncstate.dart';
+import 'package:atendimento/src/utils/routes.dart';
 import 'package:camera/camera.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:core/clinicas_core.dart';
 import 'package:flutter_getit/flutter_getit.dart';
 
-class ScanPage extends StatefulWidget {
-  const ScanPage({super.key});
+class DocumentsScanPage extends StatefulWidget {
+  const DocumentsScanPage({super.key});
 
   @override
-  State<ScanPage> createState() => _ScanPageState();
+  State<DocumentsScanPage> createState() => _DocumentsScanPageState();
 }
 
-class _ScanPageState extends State<ScanPage> {
+class _DocumentsScanPageState extends State<DocumentsScanPage> {
   late CameraController cameraController;
   @override
   void initState() {
@@ -76,13 +79,48 @@ class _ScanPageState extends State<ScanPage> {
                       ),
                     AsyncSnapshot(connectionState: ConnectionState.done) =>
                       cameraController.value.isInitialized
-                          ? CameraPreview(cameraController)
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: SizedBox(
+                                width: sizeOf.width * .5,
+                                child: CameraPreview(
+                                  cameraController,
+                                  child: DottedBorder(
+                                    dashPattern: const [1, 10, 1, 3],
+                                    borderType: BorderType.RRect,
+                                    strokeWidth: 4,
+                                    strokeCap: StrokeCap.square,
+                                    radius: const Radius.circular(16),
+                                    color: ClinicasTheme.orangeColor,
+                                    child: SizedBox.expand(),
+                                  ),
+                                ),
+                              ),
+                            )
                           : SizedBox.shrink(),
                     _ => Center(
                         child: Text('Error ao carregar a camera'),
                       )
                   },
-                )
+                ),
+                const SizedBox(
+                  height: 48,
+                ),
+                SizedBox(
+                  width: sizeOf.width * .8,
+                  height: 48,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final nav = Navigator.of(context);
+                      final foto =
+                          await cameraController.takePicture().asyncLoader();
+
+                      nav.pushNamed('$selfService$documentsScanConfirm',
+                          arguments: foto);
+                    },
+                    child: const Text('Tirar Foto'),
+                  ),
+                ),
               ],
             ),
           ),
