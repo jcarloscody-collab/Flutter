@@ -5,12 +5,20 @@
 			"path": "./atendimento"
 		},
 		{
+			"name": "Clinicas Adm Desktop",
+			"path": "./clinicas-desktop"
+		},
+		{
 			"name": "Core",
 			"path": "./core"
 		},
 		{
 			"name": "Clinicas API",
 			"path": "./clinicas_api"
+		},
+		{
+			"name": "Workspace",
+			"path": "./workspace"
 		}
 	],
 	"launch": {
