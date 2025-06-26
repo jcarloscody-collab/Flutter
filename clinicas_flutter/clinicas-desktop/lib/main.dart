@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:clinicas_adm_desktop/src/bindings/lab_clinicas_application_binding.dart';
+import 'package:clinicas_adm_desktop/src/pages/home/home_router.dart';
 import 'package:clinicas_adm_desktop/src/pages/login/login_router.dart';
 import 'package:clinicas_adm_desktop/src/pages/splash/splash_page.dart';
 import 'package:clinicas_adm_desktop/src/utils/routes.dart';
@@ -36,6 +37,7 @@ class ClinicasAutoAtendimento extends StatelessWidget {
       modules: [],
       page: [
         LoginRouter(),
+        HomeRouter(),
       ],
       pagesBuilders: [
         FlutterGetItPageBuilder(
