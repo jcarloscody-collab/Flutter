@@ -1,6 +1,8 @@
+import 'package:clinicas_adm_desktop/src/pages/home/home_controller.dart';
 import 'package:core/clinicas_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_getit/flutter_getit.dart';
 import 'package:validatorless/validatorless.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +15,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with MessageViewMixin {
   final formKey = GlobalKey<FormState>();
   final deskNumberEC = TextEditingController();
+  final controller = Injector.get<HomeController>();
+  @override
+  void initState() {
+    super.initState();
+    messageListenerMessages(stateMixin: controller);
+  }
 
   @override
   void dispose() {
@@ -76,7 +84,13 @@ class _HomePageState extends State<HomePage> with MessageViewMixin {
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final valid = formKey.currentState?.validate() ?? false;
+                      if (valid) {
+                        controller.startService(
+                            deskNum: int.parse(deskNumberEC.text));
+                      }
+                    },
                     child: const Text('Chamar próximo'),
                   ),
                 ),

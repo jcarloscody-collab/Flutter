@@ -1,5 +1,8 @@
+import 'package:clinicas_adm_desktop/src/pages/home/home_controller.dart';
 import 'package:clinicas_adm_desktop/src/pages/home/home_page.dart';
 import 'package:clinicas_adm_desktop/src/pages/login/login_controller.dart';
+import 'package:clinicas_adm_desktop/src/repositories/attendant_desk_assignment/attendant_desk_assignment_repository.dart';
+import 'package:clinicas_adm_desktop/src/repositories/attendant_desk_assignment/attendant_desk_assignment_repository_impl.dart';
 import 'package:clinicas_adm_desktop/src/repositories/login/user_repository.dart';
 import 'package:clinicas_adm_desktop/src/repositories/login/user_repository_impl.dart';
 import 'package:clinicas_adm_desktop/src/services/login/user_login_service.dart';
@@ -23,6 +26,16 @@ class HomeRouter extends FlutterGetItPageRouter {
         ),
         Bind.lazySingleton(
           (i) => LoginController(userLogin: i()),
+        ),
+        Bind.lazySingleton<AttendantDeskAssignmentRepository>(
+          (i) => AttendantDeskAssignmentRepositoryImpl(
+            restClient: i(),
+          ),
+        ),
+        Bind.lazySingleton<HomeController>(
+          (i) => HomeController(
+            assignment: i(),
+          ),
         )
       ];
 

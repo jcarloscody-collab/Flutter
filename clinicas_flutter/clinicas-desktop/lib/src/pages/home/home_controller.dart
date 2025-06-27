@@ -1,33 +1,25 @@
-import 'package:clinicas_adm_desktop/src/services/login/user_login_service.dart';
+import 'package:clinicas_adm_desktop/src/repositories/attendant_desk_assignment/attendant_desk_assignment_repository.dart';
 import 'package:core/clinicas_core.dart';
-import 'package:signals_flutter/signals_flutter.dart';
+import 'package:asyncstate/asyncstate.dart' as asyncstate;
 
 class HomeController with MessageStateMixin {
-  HomeController({required UserLoginService userLogin})
-      : _loginService = userLogin;
+  HomeController({required AttendantDeskAssignmentRepository assignment})
+      : _assignment = assignment;
 
-  final UserLoginService _loginService;
+  final AttendantDeskAssignmentRepository _assignment;
 
-  final _obscurePassword = signal(true);
-  final _logged = signal(false);
+  Future<void> startService({required int deskNum}) async {
+    asyncstate.AsyncState.show();
+    final result = await _assignment.startService(deskNumber: deskNum);
 
-  bool get obscurePassword => _obscurePassword();
-  bool get logged => _logged();
-
-  void passwordToggle() => _obscurePassword.value = !_obscurePassword.value;
-
-  Future<void> login(String email, String password) async {
-    _logged.value = true; //para teste
-
-    final loginResult =
-        await _loginService.execute(email: email, password: password);
-
-    switch (loginResult) {
-      case Left(value: ServiceException(:final msg)):
-        showError(message: msg);
+    switch (result) {
+      case Left():
+        asyncstate.AsyncState.hide();
+        showError(message: 'Erro ao iniciar guiche');
         break;
       case Right(value: _):
-        _logged.value = true;
+        asyncstate.AsyncState.hide();
+        showInfo(message: 'Registrou');
     }
   }
 }
